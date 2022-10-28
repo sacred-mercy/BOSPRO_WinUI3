@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="BOSPRO.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+    mc:Ignorable="d">
+
+    <Frame x:Name="ContentFrame">
+
+        <StackPanel x:Name="stackone" 
+                    Grid.Row="1" 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+
+            <TextBlock Margin="0,0,0,40"
+                       Text="Login"
+                       FontSize="32" 
+                       FontStyle="Normal" 
+                       TextWrapping="WrapWholeWords"
+                       CharacterSpacing="200" 
+                       Foreground="Gray" 
+                       HorizontalAlignment="Center"/>
+
+            <TextBox x:Name="emailText" 
+                     PlaceholderText="Enter E-mail" 
+                     Width="300" 
+                     InputScope="EmailSmtpAddress"/>
+
+            <PasswordBox x:Name="passwordText" 
+                         PlaceholderText="Enter Password"  
+                         Width="300" 
+                         Margin="0,20,0,0" 
+                         InputScope="Password"/>
+
+            <InfoBar x:Name="errorBar"
+                     Margin="0,10,0,10"
+                     Width="300"
+                     IsIconVisible="True"
+                     IsClosable="True"
+                     Severity="Error"
+                     Visibility="Visible"/>
+
+            <Button x:Name="loginbtn" 
+                    Style="{StaticResource AccentButtonStyle}" 
+                    Content="Login"  
+                    Margin="0,10,0,0" 
+                    HorizontalAlignment="Center" 
+                    Click="Login_btn_pressed"/>
+            
+        </StackPanel>
+
+        <Frame.ContentTransitions>
+            <TransitionCollection>
+                <NavigationThemeTransition  />
+            </TransitionCollection>
+        </Frame.ContentTransitions>
+    </Frame>
+
+</Page>

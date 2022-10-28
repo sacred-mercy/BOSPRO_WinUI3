@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "BOSPRO (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "BOSPRO (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
