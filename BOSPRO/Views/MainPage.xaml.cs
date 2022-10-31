@@ -36,7 +36,7 @@ public sealed partial class MainPage : Page
         try
         {
             var conn = new MySqlConnection(connectionString);
-            var sqlQuery = "SELECT `email`, `password`, `name`, `role`, `college` FROM `users` WHERE email='" + email + "';";
+            var sqlQuery = "SELECT * FROM `users` WHERE email='" + email + "';";
             var query = new MySqlCommand(sqlQuery, conn);
             conn.Open();
             var reader = query.ExecuteReader();

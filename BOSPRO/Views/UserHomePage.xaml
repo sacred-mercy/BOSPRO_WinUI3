@@ -7,20 +7,75 @@
     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Frame x:Name="ContentFrame">
 
-        <TextBlock
-            Grid.Row="0"
-            x:Uid="UserHome_Title"
-            Style="{StaticResource PageTitleStyle}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="0,0,0,40"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="Welcome to BOSPRO"
+                   FontSize="40"
+                   FontStyle="Normal"
+                   TextWrapping="WrapWholeWords"
+                   CharacterSpacing="200"
+                   Foreground="Gray"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"/>
 
-        <Grid Grid.Row="1">
-            
+            <ComboBox x:Name="ProgramComboBox"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Width="300"
+                  Header="Program"
+                  PlaceholderText="Pick a program"/>
+
+            <DatePicker x:Name="Year"
+                    Margin="0,0,20,0"
+                    Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Header="Session Year"
+                    Width="200"
+                    YearVisible="True"
+                    DayVisible="False"
+                    MonthVisible="False"/>
+
+            <ComboBox x:Name="SemesterComboBox"
+                  Margin="20,0,0,0"
+                  Grid.Row="2"
+                  Grid.Column="2"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Width="300"
+                  Header="Semester"
+                  PlaceholderText="Session Semester"/>
+
+            <Button x:Name="GoBtn" Content="Go"
+                Width="100"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Style="{StaticResource AccentButtonStyle}"/>
+
         </Grid>
-        
-    </Grid>
+
+        <Frame.ContentTransitions>
+            <TransitionCollection>
+                <NavigationThemeTransition/>
+            </TransitionCollection>
+        </Frame.ContentTransitions>
+    </Frame>
 </Page>
