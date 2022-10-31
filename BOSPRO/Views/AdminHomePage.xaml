@@ -39,8 +39,10 @@
 
         <NavigationView.PaneFooter>
             <StackPanel x:Name="FooterStackPanel" Orientation="Vertical" Visibility="Visible">
-                <NavigationViewItem Icon="Account" AutomationProperties.Name="download" />
-                <NavigationViewItem Icon="Admin" AutomationProperties.Name="favorite" />
+                
+                <NavigationViewItem Icon="Admin" x:Name="AdminName"/>
+                <NavigationViewItem Icon="Back" Content="Logout" />
+                
             </StackPanel>
         </NavigationView.PaneFooter>
 
