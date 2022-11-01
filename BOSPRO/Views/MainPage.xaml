@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     mc:Ignorable="d">
 
     <Frame x:Name="ContentFrame">
@@ -25,11 +24,13 @@
                        HorizontalAlignment="Center"/>
 
             <TextBox x:Name="emailText" 
+                     Header="Email"
                      PlaceholderText="Enter E-mail" 
                      Width="300" 
                      InputScope="EmailSmtpAddress"/>
 
             <PasswordBox x:Name="passwordText" 
+                         Header="Password"
                          PlaceholderText="Enter Password"  
                          Width="300" 
                          Margin="0,20,0,0" 

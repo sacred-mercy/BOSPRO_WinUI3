@@ -57,6 +57,7 @@ public sealed partial class MainPage : Page
             {
                 ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 var role = localSettings.Values["role"] as string;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (role.Equals("admin"))
                 {
                     Frame.Navigate(typeof(AdminHomePage), null);
@@ -66,6 +67,7 @@ public sealed partial class MainPage : Page
                 {
                     Frame.Navigate(typeof(UserHomePage), null);
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             else
             {
