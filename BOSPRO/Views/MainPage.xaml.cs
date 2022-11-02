@@ -19,7 +19,7 @@ public sealed partial class MainPage : Page
         InitializeComponent();
     }
 
-    private void Login_btn_pressed(object sender, RoutedEventArgs e)
+    private async void Login_btn_pressed(object sender, RoutedEventArgs e)
     {
         var email = emailText.Text;
         var password = passwordText.Password;
@@ -27,16 +27,22 @@ public sealed partial class MainPage : Page
         //verify that input box are not empty
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
-            errorBar.IsOpen = true;
-            errorBar.Title = "Empty E-Mail or Password";
+            if (string.IsNullOrEmpty(email))
+            {
+                emailStatusText.Text = "Email Field is required";
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                passwordStatusText.Text = "Password Field is required";
+            }
             return;
         }
-        var verificationEmail = "";
-        var verificationPassword = "";
 
         var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {
+            //local storage
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             var conn = new MySqlConnection(connectionString);
             var sqlQuery = "SELECT * FROM `users` WHERE email='" + email + "';";
             var query = new MySqlCommand(sqlQuery, conn);
@@ -44,23 +50,21 @@ public sealed partial class MainPage : Page
             var reader = query.ExecuteReader();
             while (reader.Read())
             {
-                verificationEmail = reader.GetString("email");
-                verificationPassword = reader.GetString("password");
-
                 //store user session in localdata
-                ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 localSettings.Values["name"] = reader.GetString("name");
+                localSettings.Values["email"] = reader.GetString("email");
+                localSettings.Values["password"] = reader.GetString("password");
                 localSettings.Values["role"] = reader.GetString("role");
                 localSettings.Values["college"] = reader.GetString("college");
             }
             conn.Close();
-
-            if (email.Equals(verificationEmail) && password.Equals(verificationPassword))
+            var dbEmail = localSettings.Values["email"] as string;
+            var dbPassword = localSettings.Values["password"] as string;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            if (dbEmail.Equals(email) && dbPassword.Equals(password))
             {
                 //checking role 
-                ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 var role = localSettings.Values["role"] as string;
-                #pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (role.Equals("admin"))
                 {
                     Frame.Navigate(typeof(AdminHomePage), null);
@@ -70,21 +74,28 @@ public sealed partial class MainPage : Page
                 {
                     Frame.Navigate(typeof(UserHomePage), null);
                 }
-                #pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
             else
             {
-                errorBar.IsOpen = true;
-                errorBar.Title = "Incorrect Credentials";
-                errorBar.Message = "Please enter vaild E-Mail or Password";
+                emailAndPasswordStatusText.Text = "Invalid Email or Password";
+                passwordText.Password = "";
             }
         }
         catch (Exception)
         {
-            errorBar.IsOpen = true;
-            errorBar.Title = "Connection error";
-            errorBar.Message = "Can't connect to database. Try later or contact admin";
+            await databaseErrorDialog.ShowAsync();
         }
+    }
 
+    private void emailText_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        emailStatusText.Text = string.Empty;
+    }
+
+    private void passwordText_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        passwordStatusText.Text = string.Empty;
     }
 }

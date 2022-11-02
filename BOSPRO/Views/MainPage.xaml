@@ -26,22 +26,44 @@
                      Header="Email"
                      PlaceholderText="Enter E-mail"
                      Width="300"
+                     TextChanged="emailText_TextChanged"
                      InputScope="EmailSmtpAddress" />
+            <TextBlock x:Name="emailStatusText"
+                       Foreground="Red"
+                       Margin="2" />
 
             <PasswordBox x:Name="passwordText"
                          Header="Password"
                          PlaceholderText="Enter Password"
                          Width="300"
-                         Margin="0,20,0,0"
+                         PasswordChanged="passwordText_PasswordChanged"
                          InputScope="Password" />
+            <TextBlock x:Name="passwordStatusText"
+                       Foreground="Red"
+                       Margin="2" />
 
-            <InfoBar x:Name="errorBar"
-                     Margin="0,10,0,10"
-                     Width="300"
-                     IsIconVisible="True"
-                     IsClosable="True"
-                     Severity="Error"
-                     Visibility="Visible" />
+            <ContentDialog x:Name="databaseErrorDialog"
+                           CloseButtonText="Ok"
+                           HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Connection error"
+                               FontStyle="Normal"
+                               FontSize="20"
+                               TextWrapping="WrapWholeWords"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="Please try again later or contact admin"
+                               FontStyle="Normal"
+                               FontSize="14"
+                               TextWrapping="WrapWholeWords"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+            </ContentDialog>
+
+            <ProgressBar x:Name="progressBar"
+                         Width="130"
+                         Visibility="Collapsed"
+                         IsIndeterminate="True" />
 
             <Button x:Name="loginbtn"
                     Style="{StaticResource AccentButtonStyle}"
@@ -49,6 +71,10 @@
                     Margin="0,10,0,0"
                     HorizontalAlignment="Center"
                     Click="Login_btn_pressed" />
+            <TextBlock x:Name="emailAndPasswordStatusText"
+                       Foreground="Red"
+                       Margin="2"
+                       HorizontalAlignment="Center" />
 
         </StackPanel>
 
