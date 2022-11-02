@@ -17,10 +17,19 @@ public sealed partial class UserHomePage : Page
     {
         ViewModel = App.GetService<UserHomeViewModel>();
         InitializeComponent();
+
+        //To insert years in year ComboBox
+        for (var i = 2020; i <= 2030; i++)
+        {
+            YearComboBox.Items.Add(i);
+        }
+
+        //To insert semesters in semester ComboBox
         for (var i = 1; i <= 10; i++)
         {
             SemesterComboBox.Items.Add(i);
         }
+
         var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {

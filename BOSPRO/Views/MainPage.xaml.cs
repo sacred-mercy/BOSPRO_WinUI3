@@ -23,6 +23,8 @@ public sealed partial class MainPage : Page
     {
         var email = emailText.Text;
         var password = passwordText.Password;
+
+        //verify that input box are not empty
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
             errorBar.IsOpen = true;
@@ -55,9 +57,10 @@ public sealed partial class MainPage : Page
 
             if (email.Equals(verificationEmail) && password.Equals(verificationPassword))
             {
+                //checking role 
                 ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 var role = localSettings.Values["role"] as string;
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                #pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (role.Equals("admin"))
                 {
                     Frame.Navigate(typeof(AdminHomePage), null);
@@ -67,7 +70,7 @@ public sealed partial class MainPage : Page
                 {
                     Frame.Navigate(typeof(UserHomePage), null);
                 }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                #pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             else
             {
