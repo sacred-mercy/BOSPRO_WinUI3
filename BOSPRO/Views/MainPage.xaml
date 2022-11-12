@@ -60,11 +60,6 @@
 
             </ContentDialog>
 
-            <ProgressBar x:Name="progressBar"
-                         Width="130"
-                         Visibility="Collapsed"
-                         IsIndeterminate="True" />
-
             <Button x:Name="loginbtn"
                     Style="{StaticResource AccentButtonStyle}"
                     Content="Login"
