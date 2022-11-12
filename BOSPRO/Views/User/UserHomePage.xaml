@@ -56,6 +56,24 @@
                       Header="Semester"
                       PlaceholderText="Session Semester" />
 
+            <ContentDialog x:Name="databaseErrorDialog"
+                           CloseButtonText="Ok"
+                           HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Connection error"
+                               FontStyle="Normal"
+                               FontSize="20"
+                               TextWrapping="WrapWholeWords"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="Please try again later or contact admin"
+                               FontStyle="Normal"
+                               FontSize="14"
+                               TextWrapping="WrapWholeWords"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+            </ContentDialog>
+
             <Button x:Name="GoBtn"
                     Content="Go"
                     Width="100"

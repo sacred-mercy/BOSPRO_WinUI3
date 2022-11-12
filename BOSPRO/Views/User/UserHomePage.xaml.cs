@@ -1,8 +1,6 @@
-﻿using System.Reflection.PortableExecutable;
-using BOSPRO.ViewModels;
+﻿using BOSPRO.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using MySql.Data.MySqlClient;
-using Windows.Storage;
 
 namespace BOSPRO.Views;
 
@@ -30,6 +28,13 @@ public sealed partial class UserHomePage : Page
             SemesterComboBox.Items.Add(i);
         }
 
+        // Get Program names
+        getProgramNamesFromDatabase();
+
+    }
+
+    private async void getProgramNamesFromDatabase()
+    {
         var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {
@@ -47,7 +52,7 @@ public sealed partial class UserHomePage : Page
         }
         catch (Exception)
         {
-            
+            await databaseErrorDialog.ShowAsync();
         }
     }
 }
