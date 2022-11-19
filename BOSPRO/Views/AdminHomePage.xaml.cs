@@ -27,4 +27,25 @@ public sealed partial class AdminHomePage : Page
     {
         // TODO: Delete selected program from Database
     }
+
+    private void programAddbtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Add the program to db
+    }
+
+    private void programCode_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        programCodeStatusText.Text = string.Empty;
+    }
+
+    private void programName_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        programNameStatusText.Text = string.Empty;
+    }
+
+    private void programCollege_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        programCollegeStatusText.Text = string.Empty;
+    }
+
 }
