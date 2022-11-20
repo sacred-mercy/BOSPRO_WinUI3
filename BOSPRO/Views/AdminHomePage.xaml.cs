@@ -48,4 +48,8 @@ public sealed partial class AdminHomePage : Page
         programCollegeStatusText.Text = string.Empty;
     }
 
+    private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Delete selected course of a program from db
+    }
 }

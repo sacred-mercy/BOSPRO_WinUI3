@@ -120,7 +120,39 @@
                     </PivotItem>
                     <PivotItem x:Name="CourseRemoveTabbedPivot"
                                Header="Remove Course">
+                        <StackPanel x:Name="stackthree"
+                                    Grid.Row="1"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <ComboBox x:Name="programCourseRemoveComboBox"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Bottom"
+                                      Width="300"
+                                      Header="Program"
+                                      PlaceholderText="Pick a program" />
+                            
+                            <ComboBox x:Name="courseRemoveComboBox"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Bottom"
+                                      Width="300"
+                                      Header="Course"
+                                      IsEnabled="False"
+                                      PlaceholderText="Pick a course" />
 
+                            <Button x:Name="courseRemovebtn"
+                                    Background="Red"
+                                    Foreground="White"
+                                    Content="Remove"
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    Click="courseRemovebtn_Click"/>
+                            <TextBlock x:Name="courseRemoveStatusText"
+                                       Foreground="Red"
+                                       Margin="2"
+                                       HorizontalAlignment="Center" />
+
+                        </StackPanel>
                     </PivotItem>
                 </Pivot>
             </PivotItem>
