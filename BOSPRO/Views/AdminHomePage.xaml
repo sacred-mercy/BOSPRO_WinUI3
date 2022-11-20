@@ -116,7 +116,72 @@
                     </Pivot.HeaderTemplate>
                     <PivotItem x:Name="CourseAddTabbedPivot"
                                Header="Add Course">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
+                            <ComboBox x:Name="courseAddProgramNameComboBox"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Width="300"
+                                      Header="Program"
+                                      PlaceholderText="Pick a program" />
+
+                            <TextBox x:Name="courseCodeToAddCourse"
+                                     Grid.Row="1"
+                                     Grid.Column="0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="300"
+                                     Header="Course Code"
+                                     PlaceholderText="Enter the Course Code" />
+
+                            <TextBox x:Name="courseSemToAddCourse"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="300"
+                                     Header="Semester"
+                                     PlaceholderText="Enter the Course Semester" />
+
+                            <TextBox x:Name="courseCreditToAddCourse"
+                                     Grid.Row="2"
+                                     Grid.Column="0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="300"
+                                     Header="Credit"
+                                     PlaceholderText="Enter the Course Credit" />
+
+                            <TextBox x:Name="courseLTPToAddCourse"
+                                     Grid.Row="2"
+                                     Grid.Column="1"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="300"
+                                     Header="L-T-P"
+                                     PlaceholderText="Enter the Course L-T-P" />
+                            <Button x:Name="AddCourseBtn"
+                                    Content="Add"
+                                    Width="100"
+                                    Grid.Row="3"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource AccentButtonStyle}" />
+                        </Grid>
                     </PivotItem>
                     <PivotItem x:Name="CourseRemoveTabbedPivot"
                                Header="Remove Course">
