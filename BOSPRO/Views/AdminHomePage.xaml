@@ -180,7 +180,8 @@
                                     Grid.ColumnSpan="2"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Style="{StaticResource AccentButtonStyle}" />
+                                    Style="{StaticResource AccentButtonStyle}" 
+                                    Click="AddCourseBtn_Click"/>
                         </Grid>
                     </PivotItem>
                     <PivotItem x:Name="CourseRemoveTabbedPivot"

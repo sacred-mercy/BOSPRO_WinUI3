@@ -52,4 +52,9 @@ public sealed partial class AdminHomePage : Page
     {
         // TODO: Delete selected course of a program from db
     }
+
+    private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+
+    }
 }
