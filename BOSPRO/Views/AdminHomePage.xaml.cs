@@ -55,6 +55,6 @@ public sealed partial class AdminHomePage : Page
 
     private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-
+        // TODO: Add course to DB
     }
 }
