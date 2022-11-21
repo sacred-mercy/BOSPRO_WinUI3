@@ -118,6 +118,15 @@ public sealed partial class AdminHomePage : Page
 
 
 
+    private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Delete selected course of a program from db
+    }
+
+    private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Add course to DB
+    }
 }
 
 //var sql = "INSERT INTO 'programs'(program_code, program_name, program_college) VALUES(aaa, aaa, aaa)";
