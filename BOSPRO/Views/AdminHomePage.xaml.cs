@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Common;
+using System.Reflection.PortableExecutable;
 using System.Xml.Linq;
 using BOSPRO.ViewModels;
 using Microsoft.UI.Xaml.Controls;
@@ -31,12 +32,21 @@ public sealed partial class AdminHomePage : Page
 
     private void programRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        // TODO: Delete selected program from Database
+        delPrograms();
     }
 
     private void programAddbtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         addPrograms();
+    }
+    private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Delete selected course of a program from db
+    }
+
+    private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        // TODO: Add course to DB
     }
 
     private void programCode_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,21 +90,20 @@ public sealed partial class AdminHomePage : Page
 
     private async void addPrograms()
     {
-        //var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {
             //This is my connection string i have assigned the database file address path
-            //string MyConnection2 = "datasource=localhost;port=3307;username=root;password=root";
             var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
 
+            //Taking user-input from the text fields
             var pcode = programCode.Text;
             var pname = programName.Text;
             var pcollege = programCollege.Text;
 
-            //This is my insert query in which i am taking input from the user through windows forms
+            //This is the insert query in which we're taking input from the user 
             var Query = "INSERT INTO `programs`(`program_code`, `program_name`, `program_college`) VALUES('"+ pcode + "', '" + pname + "', '"+ pcollege +"');";
 
-            //This is  MySqlConnection here i have created the object and pass my connection string.
+            //This is  MySqlConnection here we'll create the object and pass my connection string.
             MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
 
             //This is command class which will handle the query and connection object.
@@ -102,7 +111,7 @@ public sealed partial class AdminHomePage : Page
             MySqlDataReader MyReader2;
             MyConn2.Open();
             MyReader2 = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
-            //MessageBox.Show("Save Data");
+            await databaseOkDialog.ShowAsync();
             while (MyReader2.Read())
             {
 
@@ -116,17 +125,107 @@ public sealed partial class AdminHomePage : Page
         }
     }
 
+    private async void getProgramCode()
+    { 
+        try
+        {
+            var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+            var conn = new MySqlConnection(connectionString);
+            var sqlQuery = "SELECT `program_code` FROM `programs`;";
+            var query = new MySqlCommand(sqlQuery, conn);
+            conn.Open();
+            var reader = query.ExecuteReader();
 
+            while (reader.Read())
+            {
+                ProgramRemoveComboBox.Items.Add(reader.GetString("program_name"));
+            }
+            conn.Close();
 
-    private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        // TODO: Delete selected course of a program from db
+        }
+        catch (Exception)
+        {
+            await databaseErrorDialog.ShowAsync();
+        }
     }
-
-    private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private async void delPrograms()
     {
-        // TODO: Add course to DB
+        //string pcode;
+
+        //try
+        //{
+        //    var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        //    var conn = new MySqlConnection(connectionString);
+        //    var sqlQuery = "SELECT `program_code` FROM `programs` WHERE 'program_name'='{}';";
+
+
+
+        //    var query = new MySqlCommand(sqlQuery, conn);
+        //    conn.Open();
+        //    var reader = query.ExecuteReader();
+
+        //    while (reader.Read())
+        //    {
+        //        pcode = reader.GetString("program_code");
+        //    }
+        //    conn.Close();
+
+        //}
+        //catch (Exception)
+        //{
+        //    await databaseErrorDialog.ShowAsync();
+        //}
+
+
+
+
+
+
+
+
+
+
+        try
+        {
+            //This is my connection string i have assigned the database file address path
+            var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+
+            //This is the insert query in which we're taking input from the user 
+            var Query = "DELETE FROM `programs` WHERE 'program_code'='aaa';"; 
+
+            //This is  MySqlConnection here we'll create the object and pass my connection string.
+            MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
+
+            //This is command class which will handle the query and connection object.
+            MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
+            MySqlDataReader MyReader2;
+            MyConn2.Open();
+            MyReader2 = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
+            await databaseOkDialog.ShowAsync();
+            while (MyReader2.Read())
+            {
+
+            }
+            MyConn2.Close();
+
+            //string Query = "delete from student.studentinfo where idStudentInfo='" + this.IdTextBox.Text + "';";
+            //MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
+            //MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
+
+            //MySqlDataReader MyReader2;
+
+            //MyConn2.Open();
+            //MyReader2 = MyCommand2.ExecuteReader();
+            //MessageBox.Show("Data Deleted");
+            //while (MyReader2.Read())
+            //{
+            //}
+            //MyConn2.Close();
+
+        }
+        catch (Exception)
+        {
+            await databaseErrorDialog.ShowAsync();
+        }
     }
 }
-
-//var sql = "INSERT INTO 'programs'(program_code, program_name, program_college) VALUES(aaa, aaa, aaa)";

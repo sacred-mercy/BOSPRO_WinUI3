@@ -78,6 +78,24 @@
 
                             </ContentDialog>
 
+                            <ContentDialog x:Name="databaseOkDialog"
+                                CloseButtonText="Ok"
+                                HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="The program has been added."
+                                        FontStyle="Normal"
+                                        FontSize="20"
+                                        TextWrapping="WrapWholeWords"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock Text="Click ok to continue."
+                                        FontStyle="Normal"
+                                        FontSize="14"
+                                        TextWrapping="WrapWholeWords"
+                                        HorizontalAlignment="Center" />
+                                </StackPanel>
+
+                            </ContentDialog>
+
                             <Button x:Name="programAddbtn"
                                     Style="{StaticResource AccentButtonStyle}"
                                     Content="Add"
