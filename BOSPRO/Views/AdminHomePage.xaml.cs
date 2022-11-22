@@ -150,78 +150,33 @@ public sealed partial class AdminHomePage : Page
     }
     private async void delPrograms()
     {
-        //string pcode;
-
-        //try
-        //{
-        //    var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
-        //    var conn = new MySqlConnection(connectionString);
-        //    var sqlQuery = "SELECT `program_code` FROM `programs` WHERE 'program_name'='{}';";
-
-
-
-        //    var query = new MySqlCommand(sqlQuery, conn);
-        //    conn.Open();
-        //    var reader = query.ExecuteReader();
-
-        //    while (reader.Read())
-        //    {
-        //        pcode = reader.GetString("program_code");
-        //    }
-        //    conn.Close();
-
-        //}
-        //catch (Exception)
-        //{
-        //    await databaseErrorDialog.ShowAsync();
-        //}
-
-
-
-
-
-
-
-
-
-
         try
         {
             //This is my connection string i have assigned the database file address path
-            var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+            var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+            var conn = new MySqlConnection(connectionString);
+
+            //Getting the text from the combobox
+            var pname = ProgramRemoveComboBox.SelectedItem;
 
             //This is the insert query in which we're taking input from the user 
-            var Query = "DELETE FROM `programs` WHERE 'program_code'='aaa';"; 
+            var Query = "DELETE FROM `programs` WHERE program_name='" + pname + "';";
 
             //This is  MySqlConnection here we'll create the object and pass my connection string.
-            MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
+            MySqlConnection MyConn2 = new MySqlConnection(connectionString);
 
             //This is command class which will handle the query and connection object.
             MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
             MySqlDataReader MyReader2;
             MyConn2.Open();
-            MyReader2 = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
+            MyReader2 = MyCommand2.ExecuteReader();     
+            // Here our query will be executed and data saved into the database.
             await databaseOkDialog.ShowAsync();
             while (MyReader2.Read())
             {
 
             }
             MyConn2.Close();
-
-            //string Query = "delete from student.studentinfo where idStudentInfo='" + this.IdTextBox.Text + "';";
-            //MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
-            //MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
-
-            //MySqlDataReader MyReader2;
-
-            //MyConn2.Open();
-            //MyReader2 = MyCommand2.ExecuteReader();
-            //MessageBox.Show("Data Deleted");
-            //while (MyReader2.Read())
-            //{
-            //}
-            //MyConn2.Close();
-
         }
         catch (Exception)
         {
