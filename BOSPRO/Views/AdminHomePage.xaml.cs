@@ -66,6 +66,9 @@ public sealed partial class AdminHomePage : Page
 
     private async void getProgramNamesFromDatabase()
     {
+        //clears old list of programs
+        ProgramRemoveComboBox.Items.Clear();
+
         var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {
@@ -112,6 +115,15 @@ public sealed partial class AdminHomePage : Page
             MyConn2.Open();
             MyReader2 = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
             await databaseOkDialog.ShowAsync();
+
+            //Emptying the text fields
+            programCode.Text = String.Empty;
+            programName.Text = String.Empty;
+            programCollege.Text = String.Empty;
+
+            //Refreshing the db
+            getProgramNamesFromDatabase();
+
             while (MyReader2.Read())
             {
 
@@ -125,29 +137,6 @@ public sealed partial class AdminHomePage : Page
         }
     }
 
-    private async void getProgramCode()
-    { 
-        try
-        {
-            var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
-            var conn = new MySqlConnection(connectionString);
-            var sqlQuery = "SELECT `program_code` FROM `programs`;";
-            var query = new MySqlCommand(sqlQuery, conn);
-            conn.Open();
-            var reader = query.ExecuteReader();
-
-            while (reader.Read())
-            {
-                ProgramRemoveComboBox.Items.Add(reader.GetString("program_name"));
-            }
-            conn.Close();
-
-        }
-        catch (Exception)
-        {
-            await databaseErrorDialog.ShowAsync();
-        }
-    }
     private async void delPrograms()
     {
         try
@@ -171,10 +160,12 @@ public sealed partial class AdminHomePage : Page
             MyConn2.Open();
             MyReader2 = MyCommand2.ExecuteReader();     
             // Here our query will be executed and data saved into the database.
-            await databaseOkDialog.ShowAsync();
+            await programDeleteDialog.ShowAsync();
+            ProgramRemoveComboBox.Items.Clear();
+            getProgramNamesFromDatabase();
             while (MyReader2.Read())
             {
-
+                
             }
             MyConn2.Close();
         }

@@ -124,6 +124,24 @@
                                       Header="Program"
                                       PlaceholderText="Pick a program" />
 
+                            <ContentDialog x:Name="programDeleteDialog"
+                                CloseButtonText="Ok"
+                                HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="The program has been deleted."
+                                        FontStyle="Normal"
+                                        FontSize="20"
+                                        TextWrapping="WrapWholeWords"
+                                        HorizontalAlignment="Center" />
+                                    <TextBlock Text="Click ok to continue."
+                                        FontStyle="Normal"
+                                        FontSize="14"
+                                        TextWrapping="WrapWholeWords"
+                                        HorizontalAlignment="Center" />
+                                </StackPanel>
+
+                            </ContentDialog>
+
                             <Button x:Name="programRemovebtn"
                                     Background="Red"
                                     Foreground="White"
