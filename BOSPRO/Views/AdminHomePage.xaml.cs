@@ -26,17 +26,19 @@ public sealed partial class AdminHomePage : Page
         _ = Windows.Storage.ApplicationData.Current.LocalSettings;
         //AdminName.Content = localSettings.Values["name"] as string;
 
-        // TODO: Add Programs Name from DB to ProgramRemoveComboBox for reference see UserHomePage.xaml.cs
+        //Add Program Names from DB to ProgramRemoveComboBox
         getProgramNamesFromDatabase();
     }
 
     private void programRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        //Deletes program from DB
         delPrograms();
     }
 
     private void programAddbtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        //Adds program to the DB
         addPrograms();
     }
     private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -49,31 +51,18 @@ public sealed partial class AdminHomePage : Page
         // TODO: Add course to DB
     }
 
-    private void programCode_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        programCodeStatusText.Text = string.Empty;
-    }
-
-    private void programName_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        programNameStatusText.Text = string.Empty;
-    }
-
-    private void programCollege_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        programCollegeStatusText.Text = string.Empty;
-    }
-
     private async void getProgramNamesFromDatabase()
     {
         //clears old list of programs
         ProgramRemoveComboBox.Items.Clear();
 
-        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
         try
         {
+            var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
             var conn = new MySqlConnection(connectionString);
+
             var sqlQuery = "SELECT `program_name` FROM `programs`;";
+
             var query = new MySqlCommand(sqlQuery, conn);
             conn.Open();
             var reader = query.ExecuteReader();
@@ -95,7 +84,7 @@ public sealed partial class AdminHomePage : Page
     {
         try
         {
-            //This is my connection string i have assigned the database file address path
+            //connection string assigned the database file address path
             var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
 
             //Taking user-input from the text fields
