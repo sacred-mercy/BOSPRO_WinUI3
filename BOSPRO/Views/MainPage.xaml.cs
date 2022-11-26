@@ -72,7 +72,7 @@ public sealed partial class MainPage : Page
                 }
                 else
                 {
-                    Frame.Navigate(typeof(UserHomePage), null);
+                    Frame.Navigate(typeof(UserHomePage));
                 }
             }
             #pragma warning restore CS8602 // Dereference of a possibly null reference.

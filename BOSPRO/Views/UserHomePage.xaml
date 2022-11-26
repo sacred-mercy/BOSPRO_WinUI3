@@ -5,56 +5,38 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Frame x:Name="ContentFrame">
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Margin="0,0,0,40"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
+        <StackPanel x:Name="stackone"
+                    Grid.Row="1"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Margin="0,0,0,60"
                        Text="Welcome to BOSPRO"
                        FontSize="40"
                        FontStyle="Normal"
                        TextWrapping="WrapWholeWords"
                        CharacterSpacing="200"
                        Foreground="Gray"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom" />
+                       HorizontalAlignment="Center" />
 
             <ComboBox x:Name="ProgramComboBox"
-                      Grid.Row="1"
-                      Grid.ColumnSpan="2"
+                      Margin="0,0,0,30"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Bottom"
                       Width="300"
                       Header="Program"
                       PlaceholderText="Pick a program" />
 
             <ComboBox x:Name="YearComboBox"
-                      Margin="0,0,20,0"
-                      Grid.Row="2"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Center"
+                      Margin="0,0,0,30"
+                      HorizontalAlignment="Center"
+                      Width="300"
                       Header="Session Year"
                       PlaceholderText="Session Year" />
 
-            <ComboBox x:Name="SemesterComboBox"
-                      Margin="20,0,0,0"
-                      Grid.Row="2"
-                      Grid.Column="2"
+            <!-- <ComboBox x:Name="SemesterComboBox"
                       HorizontalAlignment="Left"
-                      VerticalAlignment="Center"
                       Header="Semester"
-                      PlaceholderText="Session Semester" />
+                      PlaceholderText="Session Semester" /> -->
 
             <ContentDialog x:Name="databaseErrorDialog"
                            CloseButtonText="Ok"
@@ -77,18 +59,11 @@
             <Button x:Name="GoBtn"
                     Content="Go"
                     Width="100"
-                    Grid.Row="3"
-                    Grid.ColumnSpan="2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Style="{StaticResource AccentButtonStyle}" />
+                    Style="{StaticResource AccentButtonStyle}"
+                    Click="GoBtn_Click"/>
 
-        </Grid>
+        </StackPanel>
 
-        <Frame.ContentTransitions>
-            <TransitionCollection>
-                <NavigationThemeTransition />
-            </TransitionCollection>
-        </Frame.ContentTransitions>
-    </Frame>
 </Page>

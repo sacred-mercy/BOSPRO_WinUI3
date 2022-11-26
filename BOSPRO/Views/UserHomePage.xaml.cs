@@ -22,11 +22,11 @@ public sealed partial class UserHomePage : Page
             YearComboBox.Items.Add(i);
         }
 
-        //To insert semesters in semester ComboBox
+        /* To insert semesters in semester ComboBox
         for (var i = 1; i <= 10; i++)
         {
             SemesterComboBox.Items.Add(i);
-        }
+        } */
 
         // Get Program names
         getProgramNamesFromDatabase();
@@ -54,5 +54,10 @@ public sealed partial class UserHomePage : Page
         {
             await databaseErrorDialog.ShowAsync();
         }
+    }
+
+    private void GoBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        //Frame.Navigate(typeof(UserProgramCoursesPage), ProgramComboBox.SelectedItem);
     }
 }
