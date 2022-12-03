@@ -58,6 +58,6 @@ public sealed partial class UserHomePage : Page
 
     private void GoBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        //Frame.Navigate(typeof(UserProgramCoursesPage), ProgramComboBox.SelectedItem);
+        Frame.Navigate(typeof(UserProgramCoursesPage), ProgramComboBox.SelectedItem);
     }
 }

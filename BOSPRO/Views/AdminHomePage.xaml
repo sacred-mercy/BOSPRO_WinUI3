@@ -36,8 +36,7 @@
                             <TextBox x:Name="programName"
                                      Header="Program"
                                      PlaceholderText="Enter Program Name"
-                                     Width="300"
-                                     TextChanged="programName_TextChanged"/>
+                                     Width="300"/>
                             <TextBlock x:Name="programNameStatusText"
                                        Foreground="Red"
                                        Margin="2" />
@@ -45,8 +44,7 @@
                             <TextBox x:Name="programCode"
                                          Header="Code"
                                          PlaceholderText="Enter Program Code"
-                                         Width="300"
-                                         TextChanged="programCode_TextChanged"/>
+                                         Width="300"/>
                             <TextBlock x:Name="programCodeStatusText"
                                        Foreground="Red"
                                        Margin="2" />
@@ -54,8 +52,7 @@
                             <TextBox x:Name="programCollege"
                                      Header="College"
                                      PlaceholderText="Enter Program College"
-                                     Width="300"
-                                     TextChanged="programCollege_TextChanged" />
+                                     Width="300" />
                             <TextBlock x:Name="programCollegeStatusText"
                                        Foreground="Red"
                                        Margin="2" />
@@ -275,6 +272,16 @@
                         </StackPanel>
                     </PivotItem>
                 </Pivot>
+            </PivotItem>
+
+            <PivotItem x:Name="TabbedPivot_Accounts"
+                       Header="Accounts">
+                
+            </PivotItem>
+
+            <PivotItem x:Name="TabbedPivot_Profile"
+                       Header="Admin Name">
+
             </PivotItem>
         </Pivot>
     </Grid>

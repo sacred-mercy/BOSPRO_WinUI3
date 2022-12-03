@@ -76,4 +76,8 @@
     <value>UserHome</value>
     <comment>Page title for UserHomePage</comment>
   </data>
+  <data name="UserProgramCourses_Title.Text" xml:space="preserve">
+    <value>UserProgramCourses</value>
+    <comment>Page title for UserProgramCoursesPage</comment>
+  </data>
 </root>
