@@ -60,4 +60,9 @@ public sealed partial class UserHomePage : Page
     {
         Frame.Navigate(typeof(UserProgramCoursesPage), ProgramComboBox.SelectedItem);
     }
+
+    private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Frame.Navigate(typeof(MainPage));
+    }
 }

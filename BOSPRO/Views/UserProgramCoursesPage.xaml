@@ -4,11 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     mc:Ignorable="d">
 
-	<Grid>
-		<Button x:Name="BackButton"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="BackButton"
                 VerticalAlignment="Top"
                 Background="Transparent"
                 BorderThickness="0"
@@ -17,19 +27,59 @@
             <SymbolIcon Symbol="Back" />
         </Button>
         <TextBlock Grid.Row="0"
+                   Grid.ColumnSpan = "3" 
                    x:Name="Program_Title"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    FontWeight="Bold"
                    FontSize="30px" />
-        <Button x:Name="PrintButton"
-                VerticalAlignment="Top"
+        <Button x:Name="ProgramPrintButton"
+                Grid.Column="3"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Content="Print"
-                Margin="0,0,20,0">
+                Style="{StaticResource AccentButtonStyle}"
+                Margin="0,0,20,0"
+                Click="ProgramPrintButton_Click">
         </Button>
 
+        <ComboBox x:Name="CourseSelectComboBox"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Width="300"
+                  Header="Course"
+                  PlaceholderText="Pick a course"
+                  Margin="0,0,0,20"/>
+        <Button x:Name="EditButton"
+                Grid.Column="1"
+                Grid.Row="2"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Content="Edit"
+                Style="{StaticResource AccentButtonStyle}"
+                Click="EditButton_Click">
+        </Button>
+        <Button x:Name="ViewButton"
+                Grid.Column="1"
+                Grid.Row="2"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Content="View"
+                Style="{StaticResource AccentButtonStyle}"
+                Click="ViewButton_Click">
+        </Button>
+        <Button x:Name="CoursePrintButton"
+                Grid.Column="1"
+                Grid.Row="2"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Content="Print"
+                Style="{StaticResource AccentButtonStyle}"
+                Click="CoursePrintButton_Click">
+        </Button>
 
-	</Grid>
+    </Grid>
     
 </Page>
