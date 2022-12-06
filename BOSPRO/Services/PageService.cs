@@ -18,6 +18,7 @@ public class PageService : IPageService
         Configure<AdminHomeViewModel, AdminHomePage>();
         Configure<UserHomeViewModel, UserHomePage>();
         Configure<UserProgramCoursesViewModel, UserProgramCoursesPage>();
+        Configure<UserEditCourseViewModel, UserEditCoursePage>();
     }
 
     public Type GetPageType(string key)

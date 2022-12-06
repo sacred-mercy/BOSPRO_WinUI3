@@ -80,4 +80,8 @@
     <value>UserProgramCourses</value>
     <comment>Page title for UserProgramCoursesPage</comment>
   </data>
+  <data name="UserEditCourse_Title.Text" xml:space="preserve">
+    <value>UserEditCourse</value>
+    <comment>Page title for UserEditCoursePage</comment>
+  </data>
 </root>
