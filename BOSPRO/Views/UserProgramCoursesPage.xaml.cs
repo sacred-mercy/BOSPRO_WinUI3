@@ -8,7 +8,7 @@ namespace BOSPRO.Views;
 
 public sealed partial class UserProgramCoursesPage : Page
 {
-    public static string program;
+    public static string program = "";
     public UserProgramCoursesViewModel ViewModel
     {
         get;
@@ -27,7 +27,7 @@ public sealed partial class UserProgramCoursesPage : Page
             var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
             var conn = new MySqlConnection(connectionString);
 
-            var sqlQuery = "SELECT `course_name` FROM `course` WHERE course_program_name=" + program + ";";
+            var sqlQuery = "SELECT `course_name` FROM `course` WHERE course_program_name=\"" + program + "\";";
 
             var query = new MySqlCommand(sqlQuery, conn);
             conn.Open();
