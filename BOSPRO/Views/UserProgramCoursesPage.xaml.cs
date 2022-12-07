@@ -63,7 +63,8 @@ public sealed partial class UserProgramCoursesPage : Page
 
     private void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        Frame.Navigate (typeof(UserEditCoursePage));
+        string[] arr = {program, (string)CourseSelectComboBox.SelectedItem };
+        Frame.Navigate (typeof(UserEditCoursePage),arr);
     }
 
     private void ViewButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
