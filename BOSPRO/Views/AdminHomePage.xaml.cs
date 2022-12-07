@@ -54,6 +54,7 @@ public sealed partial class AdminHomePage : Page
         //Adds program to the DB
         addPrograms();
     }
+
     private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         var course = courseRemoveComboBox.SelectedItem;
@@ -251,5 +252,10 @@ public sealed partial class AdminHomePage : Page
         AdminPassword.IsEnabled = true;
         AdminPassword.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         AccountChangeSave.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+    }
+
+    private void LogoutButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Frame.Navigate(typeof(MainPage));
     }
 }

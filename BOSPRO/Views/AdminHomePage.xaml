@@ -352,10 +352,12 @@
                         Content="Save"
                             HorizontalAlignment="Center"
                             Visibility="Collapsed"></Button>
-                    <Button Content="Logout"
+                    <Button x:Name="LogoutButton"
+                        Content="Logout"
                             Margin="0,30,0,0"
                             HorizontalAlignment="Center"
                             Background="Red"
+                            Click="LogoutButton_Click"
                             Foreground="White"/>
                 </StackPanel>
             </PivotItem>
