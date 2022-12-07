@@ -276,12 +276,77 @@
 
             <PivotItem x:Name="TabbedPivot_Accounts"
                        Header="Accounts">
-                
+                <Pivot>
+                    <Pivot.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}"
+                                       Text="{Binding}" />
+                        </DataTemplate>
+                    </Pivot.HeaderTemplate>
+
+                    <PivotItem Header="Add User">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBox x:Name="addAccountEmail"
+                                     Width="300"
+                                     Header="Email"/>
+                            <PasswordBox x:Name="addAccountPassword"
+                                         Width="300"
+                                         Header="Password"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                <RadioButton Content="User" />
+                                <RadioButton Content="Admin" />
+                            </StackPanel>
+                            <Button Content="Add" 
+                                    HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </PivotItem>
+
+                    <PivotItem Header="Delete User">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Select Email" />
+                            <ComboBox x:Name="RemoveEmailCombobox"
+                                      Width="300"
+                                      PlaceholderText="Select Email" />
+                            <Button Content="Remove"
+                                    Background="Red"
+                                    Foreground="White"
+                                    HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </PivotItem>
+                </Pivot>
             </PivotItem>
 
             <PivotItem x:Name="TabbedPivot_Profile"
                        Header="Admin Name">
-
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Button Content="&#xE70F;"
+                            HorizontalAlignment="Right"
+                            FontFamily="Segoe MDL2 Assets" />
+                    <TextBox x:Name="AccountAdminName"
+                             Width="300"
+                             Header="Name"
+                             IsEnabled="False" />
+                    <TextBox x:Name="txtEmail"
+                             Width="300"
+                             Header="Email"
+                             IsEnabled="False" />
+                    <PasswordBox x:Name="txtPassword"
+                                     Width="300"
+                                     Header="Password"
+                                 Visibility="Collapsed"/>
+                    <Button Content="Save"
+                            HorizontalAlignment="Center"
+                            Visibility="Collapsed"></Button>
+                    <Button Content="Logout"
+                            Margin="0,30,0,0"
+                            HorizontalAlignment="Center"
+                            Background="Red"
+                            Foreground="White"/>
+                </StackPanel>
             </PivotItem>
         </Pivot>
     </Grid>

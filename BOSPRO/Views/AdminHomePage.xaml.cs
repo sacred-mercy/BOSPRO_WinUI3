@@ -23,8 +23,8 @@ public sealed partial class AdminHomePage : Page
         InitializeComponent();
 
         // To fetch Admin name
-        _ = Windows.Storage.ApplicationData.Current.LocalSettings;
-        //AdminName.Content = localSettings.Values["name"] as string;
+        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        TabbedPivot_Profile.Header = localSettings.Values["name"] as string;
 
         //Add Program Names from DB to ProgramRemoveComboBox
         getProgramNamesFromDatabase();
