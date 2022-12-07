@@ -56,7 +56,31 @@ public sealed partial class AdminHomePage : Page
     }
     private void courseRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        // TODO: Delete selected course of a program from db
+        var course = courseRemoveComboBox.SelectedItem;
+        var program = programCourseRemoveComboBox.SelectedItem;
+        //This is my connection string i have assigned the database file address path
+        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        var conn = new MySqlConnection(connectionString);
+        //This is the insert query in which we're taking input from the user 
+        var Query = "DELETE FROM `course` WHERE course_program_name='" + program +
+            "' AND course_name='" + course + "';";
+
+        //This is  MySqlConnection here we'll create the object and pass my connection string.
+        var MyConn2 = new MySqlConnection(connectionString);
+
+        //This is command class which will handle the query and connection object.
+        var MyCommand2 = new MySqlCommand(Query, MyConn2);
+        MySqlDataReader MyReader2;
+        MyConn2.Open();
+        MyReader2 = MyCommand2.ExecuteReader();
+        // Here our query will be executed and data saved into the database.
+        while (MyReader2.Read())
+        {
+
+        }
+        MyConn2.Close();
+        courseRemoveComboBox.Items.Clear();
+        courseRemoveComboBox.IsEnabled = false;
     }
 
     private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -189,10 +213,10 @@ public sealed partial class AdminHomePage : Page
             var Query = "DELETE FROM `programs` WHERE program_name='" + pname + "';";
 
             //This is  MySqlConnection here we'll create the object and pass my connection string.
-            MySqlConnection MyConn2 = new MySqlConnection(connectionString);
+            var MyConn2 = new MySqlConnection(connectionString);
 
             //This is command class which will handle the query and connection object.
-            MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
+            var MyCommand2 = new MySqlCommand(Query, MyConn2);
             MySqlDataReader MyReader2;
             MyConn2.Open();
             MyReader2 = MyCommand2.ExecuteReader();
@@ -214,9 +238,18 @@ public sealed partial class AdminHomePage : Page
 
     private void programCourseRemoveComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-
+        courseRemoveComboBox.Items.Clear();
         //Add course names to corse comboBox in remove course pivot
         getCoursesFromDatabase();
         courseRemoveComboBox.IsEnabled = true;
+    }
+
+    private void AccountEditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        AdminName.IsEnabled = true;
+        AdminEmail.IsEnabled = true;
+        AdminPassword.IsEnabled = true;
+        AdminPassword.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+        AccountChangeSave.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
     }
 }

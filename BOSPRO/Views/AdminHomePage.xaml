@@ -328,26 +328,28 @@
                 </Pivot>
             </PivotItem>
 
-            <PivotItem x:Name="TabbedPivot_Profile"
-                       Header="Admin Name">
+            <PivotItem x:Name="TabbedPivot_Profile">
                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center">
-                    <Button Content="&#xE70F;"
+                    <Button x:Name="AccountEditButton"
+                            Click="AccountEditButton_Click" 
+                            Content="&#xE70F;"
                             HorizontalAlignment="Right"
                             FontFamily="Segoe MDL2 Assets" />
-                    <TextBox x:Name="AccountAdminName"
+                    <TextBox x:Name="AdminName"
                              Width="300"
                              Header="Name"
                              IsEnabled="False" />
-                    <TextBox x:Name="txtEmail"
+                    <TextBox x:Name="AdminEmail"
                              Width="300"
                              Header="Email"
                              IsEnabled="False" />
-                    <PasswordBox x:Name="txtPassword"
+                    <PasswordBox x:Name="AdminPassword"
                                      Width="300"
                                      Header="Password"
                                  Visibility="Collapsed"/>
-                    <Button Content="Save"
+                    <Button x:Name="AccountChangeSave"
+                        Content="Save"
                             HorizontalAlignment="Center"
                             Visibility="Collapsed"></Button>
                     <Button Content="Logout"
