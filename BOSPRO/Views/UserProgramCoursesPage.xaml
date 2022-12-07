@@ -62,16 +62,6 @@
                 Style="{StaticResource AccentButtonStyle}"
                 Click="EditButton_Click">
         </Button>
-        <Button x:Name="ViewButton"
-                Grid.Column="1"
-                Grid.Row="2"
-                Visibility="Collapsed"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center"
-                Content="View"
-                Style="{StaticResource AccentButtonStyle}"
-                Click="ViewButton_Click">
-        </Button>
         <Button x:Name="CoursePrintButton"
                 Grid.Column="1"
                 Grid.Row="2"

@@ -182,12 +182,20 @@
                             <ComboBox x:Name="courseAddProgramNameComboBox"
                                       Grid.Row="0"
                                       Grid.Column="0"
-                                      Grid.ColumnSpan="2"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       Width="300"
                                       Header="Program"
                                       PlaceholderText="Pick a program" />
+
+                            <TextBox x:Name="courseNameToAddCourse"
+                                     Grid.Row="0"
+                                     Grid.Column="1"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="300"
+                                     Header="Course Name"
+                                     PlaceholderText="Enter the Course Name" />
 
                             <TextBox x:Name="courseCodeToAddCourse"
                                      Grid.Row="1"
@@ -245,6 +253,7 @@
                             <ComboBox x:Name="programCourseRemoveComboBox"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Bottom"
+                                      SelectionChanged="programCourseRemoveComboBox_SelectionChanged"
                                       Width="300"
                                       Header="Program"
                                       PlaceholderText="Pick a program" />

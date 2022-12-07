@@ -37,8 +37,6 @@ public sealed partial class UserProgramCoursesPage : Page
 
             while (reader.Read())
             {
-                Console.WriteLine("test");
-                Console.WriteLine(reader.GetString("course_name"));
                 CourseSelectComboBox.Items.Add(reader.GetString("course_name"));
             }
             conn.Close();
@@ -69,11 +67,6 @@ public sealed partial class UserProgramCoursesPage : Page
     {
         string[] arr = { program, year, (string)CourseSelectComboBox.SelectedItem };
         Frame.Navigate(typeof(UserEditCoursePage), arr);
-    }
-
-    private void ViewButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-
     }
 
     private void CoursePrintButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

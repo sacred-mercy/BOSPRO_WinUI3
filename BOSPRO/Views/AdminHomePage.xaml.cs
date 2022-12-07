@@ -25,6 +25,24 @@ public sealed partial class AdminHomePage : Page
         getProgramNamesFromDatabase();
     }
 
+    private void getCoursesFromDatabase()
+    {
+        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        var conn = new MySqlConnection(connectionString);
+        var program = programCourseRemoveComboBox.SelectedItem;
+        var sqlQuery = "SELECT `course_name` FROM `course` WHERE course_program_name=\"" + program + "\";";
+
+        var query = new MySqlCommand(sqlQuery, conn);
+        conn.Open();
+        var reader = query.ExecuteReader();
+
+        while (reader.Read())
+        {
+            courseRemoveComboBox.Items.Add(reader.GetString("course_name"));
+        }
+        conn.Close();
+    }
+
     private void programRemovebtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         //Deletes program from DB
@@ -43,14 +61,47 @@ public sealed partial class AdminHomePage : Page
 
     private void AddCourseBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        // TODO: Add course to DB
+        //Taking user-input from the text fields
+
+        var program = courseAddProgramNameComboBox.SelectedItem;
+        var code = courseCodeToAddCourse.Text;
+        var sem = courseSemToAddCourse.Text;
+        var credit = courseCreditToAddCourse.Text;
+        var ltp = courseLTPToAddCourse.Text;
+        var name = courseNameToAddCourse.Text;
+
+        //connection string assigned the database file address path
+        var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+
+        //This is the insert query in which we're taking input from the user 
+        var Query = "INSERT INTO `course`(`course_code`, `course_name`, " +
+            "`course_credit`, `course_ltp`, `course_semester`, `course_program_name`)" +
+            " VALUES('" + code + "', '" + name + "', '" + credit + "', '" + ltp + "'" +
+            ", '" + sem + "', '" + program + "');";
+
+        //This is  MySqlConnection here we'll create the object and pass my connection string.
+        var MyConn2 = new MySqlConnection(MyConnection2);
+
+        //This is command class which will handle the query and connection object.
+        var MyCommand2 = new MySqlCommand(Query, MyConn2);
+        MyConn2.Open();
+        _ = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
+
+        //Emptying the text fields
+        courseAddProgramNameComboBox.SelectedItem = "";
+        courseCodeToAddCourse.Text = "";
+        courseSemToAddCourse.Text = "";
+        courseCreditToAddCourse.Text = "";
+        courseLTPToAddCourse.Text = "";
+        courseNameToAddCourse.Text = "";
     }
 
     private async void getProgramNamesFromDatabase()
     {
         //clears old list of programs
         ProgramRemoveComboBox.Items.Clear();
-
+        courseAddProgramNameComboBox.Items.Clear();
+        programCourseRemoveComboBox.Items.Clear();
         try
         {
             var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
@@ -65,6 +116,8 @@ public sealed partial class AdminHomePage : Page
             while (reader.Read())
             {
                 ProgramRemoveComboBox.Items.Add(reader.GetString("program_name"));
+                courseAddProgramNameComboBox.Items.Add(reader.GetString("program_name"));
+                programCourseRemoveComboBox.Items.Add(reader.GetString("program_name"));
             }
             conn.Close();
 
@@ -157,5 +210,13 @@ public sealed partial class AdminHomePage : Page
         {
             await databaseErrorDialog.ShowAsync();
         }
+    }
+
+    private void programCourseRemoveComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+        //Add course names to corse comboBox in remove course pivot
+        getCoursesFromDatabase();
+        courseRemoveComboBox.IsEnabled = true;
     }
 }
