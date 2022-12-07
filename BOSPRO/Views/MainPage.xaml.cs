@@ -60,7 +60,7 @@ public sealed partial class MainPage : Page
             conn.Close();
             var dbEmail = localSettings.Values["email"] as string;
             var dbPassword = localSettings.Values["password"] as string;
-            #pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             if (dbEmail.Equals(email) && dbPassword.Equals(password))
             {
                 //checking role 
@@ -75,7 +75,7 @@ public sealed partial class MainPage : Page
                     Frame.Navigate(typeof(UserHomePage));
                 }
             }
-            #pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             else
             {

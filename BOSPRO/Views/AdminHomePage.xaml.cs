@@ -1,11 +1,6 @@
-﻿using System;
-using System.Data.Common;
-using System.Reflection.PortableExecutable;
-using System.Xml.Linq;
-using BOSPRO.ViewModels;
+﻿using BOSPRO.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using MySql.Data.MySqlClient;
-using Windows.Storage;
 
 namespace BOSPRO.Views;
 
@@ -18,7 +13,7 @@ public sealed partial class AdminHomePage : Page
 
     public AdminHomePage()
     {
-        
+
         ViewModel = App.GetService<AdminHomeViewModel>();
         InitializeComponent();
 
@@ -93,7 +88,7 @@ public sealed partial class AdminHomePage : Page
             var pcollege = programCollege.Text;
 
             //This is the insert query in which we're taking input from the user 
-            var Query = "INSERT INTO `programs`(`program_code`, `program_name`, `program_college`) VALUES('"+ pcode + "', '" + pname + "', '"+ pcollege +"');";
+            var Query = "INSERT INTO `programs`(`program_code`, `program_name`, `program_college`) VALUES('" + pcode + "', '" + pname + "', '" + pcollege + "');";
 
             //This is  MySqlConnection here we'll create the object and pass my connection string.
             MySqlConnection MyConn2 = new MySqlConnection(MyConnection2);
@@ -147,14 +142,14 @@ public sealed partial class AdminHomePage : Page
             MySqlCommand MyCommand2 = new MySqlCommand(Query, MyConn2);
             MySqlDataReader MyReader2;
             MyConn2.Open();
-            MyReader2 = MyCommand2.ExecuteReader();     
+            MyReader2 = MyCommand2.ExecuteReader();
             // Here our query will be executed and data saved into the database.
             await programDeleteDialog.ShowAsync();
             ProgramRemoveComboBox.Items.Clear();
             getProgramNamesFromDatabase();
             while (MyReader2.Read())
             {
-                
+
             }
             MyConn2.Close();
         }

@@ -1,5 +1,4 @@
 ﻿using BOSPRO.ViewModels;
-using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -35,6 +34,6 @@ public sealed partial class UserEditCoursePage : Page
     private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         string[] arr = { program, year };
-        Frame.Navigate(typeof(UserProgramCoursesPage),arr);
+        Frame.Navigate(typeof(UserProgramCoursesPage), arr);
     }
 }

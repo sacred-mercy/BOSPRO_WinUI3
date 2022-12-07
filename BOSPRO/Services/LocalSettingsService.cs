@@ -5,8 +5,6 @@ using BOSPRO.Helpers;
 using BOSPRO.Models;
 
 using Microsoft.Extensions.Options;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace BOSPRO.Services;
