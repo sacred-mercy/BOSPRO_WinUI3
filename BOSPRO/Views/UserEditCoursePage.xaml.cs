@@ -34,6 +34,7 @@ public sealed partial class UserEditCoursePage : Page
 
     private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        Frame.Navigate(typeof(UserProgramCoursesPage));
+        string[] arr = { program, year };
+        Frame.Navigate(typeof(UserProgramCoursesPage),arr);
     }
 }
