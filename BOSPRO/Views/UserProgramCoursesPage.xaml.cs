@@ -9,6 +9,8 @@ namespace BOSPRO.Views;
 public sealed partial class UserProgramCoursesPage : Page
 {
     public static string program = "";
+    public static string year = "";
+
     public UserProgramCoursesViewModel ViewModel
     {
         get;
@@ -49,7 +51,9 @@ public sealed partial class UserProgramCoursesPage : Page
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        program = (string)e.Parameter;
+        var arr = (string[])e.Parameter;
+        program = arr[0];
+        year = arr[1];
         Program_Title.Text = program;
         base.OnNavigatedTo(e);
         getCourseNames();
@@ -63,7 +67,7 @@ public sealed partial class UserProgramCoursesPage : Page
 
     private void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        string[] arr = {program, (string)CourseSelectComboBox.SelectedItem };
+        string[] arr = {program,year, (string)CourseSelectComboBox.SelectedItem };
         Frame.Navigate (typeof(UserEditCoursePage),arr);
     }
 

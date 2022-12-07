@@ -28,23 +28,26 @@
                        HorizontalAlignment="Center" />
 
             <ComboBox x:Name="ProgramComboBox"
-                      Margin="0,0,0,30"
                       HorizontalAlignment="Center"
                       Width="300"
                       Header="Program"
+                      SelectionChanged="ProgramComboBox_SelectionChanged"
                       PlaceholderText="Pick a program" />
+            <TextBlock x:Name="programStatusText"
+                       HorizontalAlignment="Center"
+                       Margin="0,2,0,20"
+                       Foreground="Red"/>
 
             <ComboBox x:Name="YearComboBox"
-                      Margin="0,0,0,30"
                       HorizontalAlignment="Center"
                       Width="300"
+                      SelectionChanged="YearComboBox_SelectionChanged"
                       Header="Session Year"
                       PlaceholderText="Session Year" />
-
-            <!-- <ComboBox x:Name="SemesterComboBox"
-                      HorizontalAlignment="Left"
-                      Header="Semester"
-                      PlaceholderText="Session Semester" /> -->
+            <TextBlock x:Name="yearStatusText"
+                       HorizontalAlignment="Center"
+                       Foreground="Red"
+                       Margin="0,2,0,20" />
 
             <ContentDialog x:Name="databaseErrorDialog"
                            CloseButtonText="Ok"

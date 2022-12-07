@@ -6,6 +6,7 @@ namespace BOSPRO.Views;
 
 public sealed partial class UserHomePage : Page
 {
+    static int yearNum = 0;
     public UserHomeViewModel ViewModel
     {
         get;
@@ -21,12 +22,6 @@ public sealed partial class UserHomePage : Page
         {
             YearComboBox.Items.Add(i);
         }
-
-        /* To insert semesters in semester ComboBox
-        for (var i = 1; i <= 10; i++)
-        {
-            SemesterComboBox.Items.Add(i);
-        } */
 
         // Get Program names
         getProgramNamesFromDatabase();
@@ -58,11 +53,38 @@ public sealed partial class UserHomePage : Page
 
     private void GoBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        Frame.Navigate(typeof(UserProgramCoursesPage), ProgramComboBox.SelectedItem);
+        var program = (string)ProgramComboBox.SelectedItem;
+        var year = yearNum.ToString();
+        if (year == "0") year = "";
+        if (string.IsNullOrEmpty(program) || string.IsNullOrEmpty(year))
+        {
+            if (string.IsNullOrEmpty(program))
+            {
+                programStatusText.Text = "Select a program";
+            }
+            if (string.IsNullOrEmpty(year))
+            {
+                yearStatusText.Text = "Select a year";
+            }
+            return;
+        }
+        string[] arr = { program, year };
+        Frame.Navigate(typeof(UserProgramCoursesPage), arr);
     }
 
     private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         Frame.Navigate(typeof(MainPage));
+    }
+
+    private void ProgramComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        programStatusText.Text = "";
+    }
+
+    private void YearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        yearNum = (int)YearComboBox.SelectedItem;
+        yearStatusText.Text = "";
     }
 }

@@ -9,6 +9,8 @@ public sealed partial class UserEditCoursePage : Page
 {
     public string program = "";
     public string course = "";
+    public string year = "";
+
     public UserEditCourseViewModel ViewModel
     {
         get;
@@ -24,7 +26,8 @@ public sealed partial class UserEditCoursePage : Page
     {
         var arr = (string[])e.Parameter;
         program = arr[0];
-        course = arr[1];
+        year = arr[1];
+        course = arr[2];
         Course_Title.Text = course;
         base.OnNavigatedTo(e);
     }
