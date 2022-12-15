@@ -23,6 +23,27 @@ public sealed partial class AdminHomePage : Page
 
         //Add Program Names from DB to ProgramRemoveComboBox
         getProgramNamesFromDatabase();
+
+        //Add Users Names from DB to RemoveEmailCombobox
+        getUsersFromDatabase();
+    }
+
+    private void getUsersFromDatabase()
+    {
+        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        var conn = new MySqlConnection(connectionString);
+
+        var sqlQuery = "SELECT `email` FROM `users`;";
+
+        var query = new MySqlCommand(sqlQuery, conn);
+        conn.Open();
+        var reader = query.ExecuteReader();
+
+        while (reader.Read())
+        {
+            RemoveEmailCombobox.Items.Add(reader.GetString("email"));
+        }
+        conn.Close();
     }
 
     private void getCoursesFromDatabase()
@@ -280,6 +301,7 @@ public sealed partial class AdminHomePage : Page
             var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
             var conn = new MySqlConnection(connectionString);
             var sqlQuery = "UPDATE users ";
+            //TODO: work left
             var query = new MySqlCommand(sqlQuery, conn);
             conn.Open();
             var reader = query.ExecuteReader();
@@ -293,5 +315,35 @@ public sealed partial class AdminHomePage : Page
             AccountSettingChangeErrorBox.Text = "Current Password Is Wrong";
             AdminCurrentPassword.Password = "";
         }
+    }
+
+    private void AccountRemoveButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        //This is my connection string i have assigned the database file address path
+        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        var conn = new MySqlConnection(connectionString);
+
+        //Getting the text from the combobox
+        var pname = RemoveEmailCombobox.SelectedItem;
+
+        //This is the insert query in which we're taking input from the user 
+        var Query = "DELETE FROM `users` WHERE email='" + pname + "';";
+
+        //This is  MySqlConnection here we'll create the object and pass my connection string.
+        var MyConn2 = new MySqlConnection(connectionString);
+
+        //This is command class which will handle the query and connection object.
+        var MyCommand2 = new MySqlCommand(Query, MyConn2);
+        MySqlDataReader MyReader2;
+        MyConn2.Open();
+        MyReader2 = MyCommand2.ExecuteReader();
+        // Here our query will be executed and data saved into the database.
+        RemoveEmailCombobox.Items.Clear();
+        getUsersFromDatabase();
+        while (MyReader2.Read())
+        {
+
+        }
+        MyConn2.Close();
     }
 }
