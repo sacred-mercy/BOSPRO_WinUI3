@@ -344,12 +344,23 @@
                              Width="300"
                              Header="Email"
                              IsEnabled="False" />
-                    <PasswordBox x:Name="AdminPassword"
+                    <PasswordBox x:Name="AdminCurrentPassword"
                                      Width="300"
-                                     Header="Password"
+                                 PlaceholderText="Enter Current Password"
+                                     Header="Current Password"
                                  Visibility="Collapsed"/>
+                    <PasswordBox x:Name="AdminNewPassword"
+                                 Width="300"
+                                 PlaceholderText="Enter New Password"
+                                 Header="New Password"
+                                 Visibility="Collapsed" />
+                    <TextBlock Foreground="Red"
+                               x:Name="AccountSettingChangeErrorBox"
+                               ></TextBlock>
                     <Button x:Name="AccountChangeSave"
                         Content="Save"
+                            Click="AccountChangeSave_Click"
+                            Margin="0,10,0,0"
                             HorizontalAlignment="Center"
                             Visibility="Collapsed"></Button>
                     <Button x:Name="LogoutButton"

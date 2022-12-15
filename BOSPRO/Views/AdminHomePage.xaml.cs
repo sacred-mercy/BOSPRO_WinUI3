@@ -249,13 +249,49 @@ public sealed partial class AdminHomePage : Page
     {
         AdminName.IsEnabled = true;
         AdminEmail.IsEnabled = true;
-        AdminPassword.IsEnabled = true;
-        AdminPassword.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+        AdminCurrentPassword.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+        AdminNewPassword.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         AccountChangeSave.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
     }
 
     private void LogoutButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         Frame.Navigate(typeof(MainPage));
+    }
+
+    private void AccountChangeSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if(string.IsNullOrEmpty(AdminName.Text) ||
+            string.IsNullOrEmpty(AdminEmail.Text) || 
+            string.IsNullOrEmpty(AdminCurrentPassword.Password) ||
+            string.IsNullOrEmpty(AdminNewPassword.Password))
+        {
+            AccountSettingChangeErrorBox.Text = "All fields are required";
+            return;
+        }
+
+        var email = AdminEmail.Text;
+        var name = AdminName.Text;
+        var password = AdminCurrentPassword.Password;
+        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        var passwordFromDB = localSettings.Values["password"] as string;
+        if (password.Equals(passwordFromDB))
+        {
+            var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+            var conn = new MySqlConnection(connectionString);
+            var sqlQuery = "UPDATE users ";
+            var query = new MySqlCommand(sqlQuery, conn);
+            conn.Open();
+            var reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+            }
+            conn.Close();
+        }
+        else
+        {
+            AccountSettingChangeErrorBox.Text = "Current Password Is Wrong";
+            AdminCurrentPassword.Password = "";
+        }
     }
 }
