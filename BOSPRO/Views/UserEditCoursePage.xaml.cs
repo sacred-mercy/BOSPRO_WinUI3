@@ -1,6 +1,7 @@
 ﻿using BOSPRO.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using MySql.Data.MySqlClient;
 
 namespace BOSPRO.Views;
 
@@ -9,6 +10,7 @@ public sealed partial class UserEditCoursePage : Page
     public string program = "";
     public string course = "";
     public string year = "";
+    public string courseCode = "";
 
     public UserEditCourseViewModel ViewModel
     {
@@ -28,7 +30,26 @@ public sealed partial class UserEditCoursePage : Page
         year = arr[1];
         course = arr[2];
         Course_Title.Text = course;
+        GetCourseCode();
         base.OnNavigatedTo(e);
+    }
+
+    private void GetCourseCode()
+    {
+        var connectionString = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        var conn = new MySqlConnection(connectionString);
+
+        var sqlQuery = "SELECT `course_code` FROM `course` WHERE course_program_name=\"" + program + "\" AND course_name=\"" + course + "\";";
+
+        var query = new MySqlCommand(sqlQuery, conn);
+        conn.Open();
+        var reader = query.ExecuteReader();
+
+        while (reader.Read())
+        {
+            courseCode = reader.GetString("course_code");
+        }
+        conn.Close();
     }
 
     private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
