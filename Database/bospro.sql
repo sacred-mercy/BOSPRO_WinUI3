@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 05:16 AM
+-- Generation Time: Dec 23, 2022 at 05:31 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -36,6 +36,29 @@ CREATE TABLE `course` (
   `course_program_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`course_code`, `course_name`, `course_credit`, `course_ltp`, `course_semester`, `course_program_name`) VALUES
+('BSIT-C-501', '.Net Technologies and Framework', '3', '4-2-3', 5, 'Bachelors of Information Technology'),
+('BSIT-C-502', 'Computer Graphics And Animations', '2', '3-4-2', 5, 'Bachelors of Information Technology');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_data`
+--
+
+CREATE TABLE `course_data` (
+  `code` varchar(20) NOT NULL,
+  `year` year(4) NOT NULL,
+  `objective` text NOT NULL,
+  `syllabus` longtext NOT NULL,
+  `outcome` text NOT NULL,
+  `reference` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -43,10 +66,18 @@ CREATE TABLE `course` (
 --
 
 CREATE TABLE `programs` (
-  `program_code` varchar(50) NOT NULL,
-  `programs_program_name` varchar(255) NOT NULL,
-  `program_college` varchar(255) NOT NULL
+  `program_code` varchar(10) NOT NULL,
+  `program_name` tinytext NOT NULL,
+  `program_college` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `programs`
+--
+
+INSERT INTO `programs` (`program_code`, `program_name`, `program_college`) VALUES
+('BSCIT', 'Bachelors of Information Technology', 'USCS'),
+('BCA', 'bachelors of Computer application', 'UIT');
 
 -- --------------------------------------------------------
 
@@ -70,34 +101,6 @@ INSERT INTO `users` (`email`, `password`, `name`, `role`, `college`) VALUES
 ('g', 'g', 'Gaurav Singh', 'user', 'USCS'),
 ('a', 'a', 'Admin Singh', 'admin', 'UIT'),
 ('f', 'f', 'Faurav Singh', 'user', 'UIM');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `course`
---
-ALTER TABLE `course`
-  ADD PRIMARY KEY (`course_code`),
-  ADD KEY `program_name` (`course_program_name`);
-
---
--- Indexes for table `programs`
---
-ALTER TABLE `programs`
-  ADD PRIMARY KEY (`program_code`),
-  ADD KEY `program_name` (`programs_program_name`);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `course`
---
-ALTER TABLE `course`
-  ADD CONSTRAINT `f_key` FOREIGN KEY (`course_program_name`) REFERENCES `programs` (`programs_program_name`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
