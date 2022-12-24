@@ -6,6 +6,10 @@ using MySql.Data.MySqlClient;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
 using Windows.Storage;
+using Microsoft.VisualBasic;
+//using static Google.Protobuf.Collections.MapField<TKey, TValue>;
+using System.Security.AccessControl;
+using Org.BouncyCastle.Utilities;
 
 namespace BOSPRO.Views;
 
@@ -64,40 +68,77 @@ public sealed partial class UserEditCoursePage : Page
 
     private async void SubmitButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var savePicker = new FileSavePicker
+
+        //Taking user-input from the text fields
+        var obj = courseObjective.Text;
+        var syll = courseSyllabus.Text;
+        var outc = courseOutcome.Text;
+        var refe = courseReference.Text;
+
+        //connection string assigned the database file address path
+        var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+
+
+        var conn = new MySqlConnection(MyConnection2);
+
+        var sqlQuery = "SELECT `outcome` FROM `course_data` WHERE code=\"" + courseCode + "\";";
+
+        var query = new MySqlCommand(sqlQuery, conn);
+        conn.Open();
+        //var reader = query.ExecuteReader();
+
+        var result = query.ExecuteScalar();
+
+        if (result != outc && result is not null)
         {
-            SuggestedStartLocation = PickerLocationId.DocumentsLibrary
-        };
+            //courseObjective.Text = "Record exists";
 
-        // Dropdown of file types the user can save the file as
-        savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
+            string query2 = "UPDATE course_data " +
+    "SET objective=@obj, syllabus=@syll, outcome=@outc, reference=@refe " +
+    " WHERE code=@code;";
 
-        // Default file name if the user does not type one in or select a file to replace
-        savePicker.SuggestedFileName = "New Document";
-
-        StorageFile file = await savePicker.PickSaveFileAsync();
-        if (file != null)
-        {
-            // Prevent updates to the remote version of the file until we
-            // finish making changes and call CompleteUpdatesAsync.
-            CachedFileManager.DeferUpdates(file);
-            // write to file
-            using (var randAccStream =
-                await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite))
+            using (MySqlCommand command = new MySqlCommand(query2, conn))
             {
-                editor.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
+                //updating data in the sql table with the initial variables  
+                command.Parameters.AddWithValue("@code", courseCode);
+                command.Parameters.AddWithValue("@obj", obj);
+                command.Parameters.AddWithValue("@syll", syll);
+                command.Parameters.AddWithValue("@outc", outc);
+                command.Parameters.AddWithValue("@refe", refe);
+
+                command.ExecuteNonQuery();
+
             }
 
-            // Let Windows know that we're finished changing the file so the
-            // other app can update the remote version of the file.
-            FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
-            if (status != FileUpdateStatus.Complete)
-            {
-                var errorBox =
-                    new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
-                await errorBox.ShowAsync();
-            }
         }
+        else
+        {
+
+            //This is the insert query in which we're taking input from the user 
+            var Query = "INSERT INTO `course_data`(`code`, " +
+                "`objective`, `syllabus`, `outcome`, `reference`)" +
+                " VALUES('" + courseCode + "', '" + obj + "', '" + syll + "', '" + outc + "'" +
+                ", '" + refe + "');";
+
+            //This is  MySqlConnection here we'll create the object and pass my connection string.
+            var MyConn2 = new MySqlConnection(MyConnection2);
+
+            //This is command class which will handle the query and connection object.
+            var MyCommand2 = new MySqlCommand(Query, MyConn2);
+            MyConn2.Open();
+            _ = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
+
+            conn.Close();
+        }
+        
+        //##################  Agar textboxes clear karna ho to ye un-comment kardena ##################
+
+        //Emptying the text fields
+        //courseObjective.Text = "";
+        //courseSyllabus.Text = "";
+        //courseOutcome.Text = "";
+        //courseReference.Text = "";
+
     }
 
     private async void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -118,7 +159,7 @@ public sealed partial class UserEditCoursePage : Page
             using var randAccStream =
                 await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
             // Load the file into the Document property of the RichEditBox.
-            editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
+            //editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
         }
     }
 }
