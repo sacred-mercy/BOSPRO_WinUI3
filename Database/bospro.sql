@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2022 at 06:50 PM
+-- Generation Time: Dec 25, 2022 at 08:24 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -52,11 +52,22 @@ INSERT INTO `course` (`course_code`, `course_name`, `course_credit`, `course_ltp
 
 CREATE TABLE `course_data` (
   `code` varchar(20) NOT NULL,
+  `year` year(4) NOT NULL,
   `objective` text NOT NULL,
   `syllabus` longtext NOT NULL,
   `outcome` text NOT NULL,
   `reference` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `course_data`
+--
+
+INSERT INTO `course_data` (`code`, `year`, `objective`, `syllabus`, `outcome`, `reference`) VALUES
+('BSIT-C-502', 2020, 'jbbi', 'hhiuhih', 'hiuhi', 'hiu'),
+('BSIT-C-501', 2021, 'oihih', 'oi', 'hoi', 'ho'),
+('BSIT-C-502', 2021, 'bygg', 'igiugiu', 'giugiug', 'iugig'),
+('BSIT-C-501', 2025, 'ihiuh', 'iuhiuh', 'hiuhih', 'ihiuh');
 
 -- --------------------------------------------------------
 
@@ -100,16 +111,6 @@ INSERT INTO `users` (`email`, `password`, `name`, `role`, `college`) VALUES
 ('g', 'g', 'Gaurav Singh', 'user', 'USCS'),
 ('a', 'a', 'Admin Singh', 'admin', 'UIT'),
 ('f', 'f', 'Faurav Singh', 'user', 'UIM');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `course_data`
---
-ALTER TABLE `course_data`
-  ADD PRIMARY KEY (`code`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

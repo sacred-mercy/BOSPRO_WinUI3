@@ -40,6 +40,7 @@
                 Margin="0,0,20,0"
                 HorizontalAlignment="Right"
                 Content="Print"
+                Visibility="Collapsed"
                 Style="{StaticResource AccentButtonStyle}"
                 Click="ProgramPrintButton_Click">
         </Button>

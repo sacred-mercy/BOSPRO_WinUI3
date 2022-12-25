@@ -29,6 +29,40 @@ public sealed partial class UserEditCoursePage : Page
     {
         ViewModel = App.GetService<UserEditCourseViewModel>();
         InitializeComponent();
+        getCourseData();
+    }
+
+    private void getCourseData()
+    {
+        var outc = courseOutcome.Text;
+        //connection string assigned the database file address path
+        var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+
+
+        var conn = new MySqlConnection(MyConnection2);
+
+        var sqlQuery = "SELECT `outcome` FROM `course_data` WHERE code=\"" + courseCode + "\" AND year=\"" + courseCode + "\";";
+
+        var query = new MySqlCommand(sqlQuery, conn);
+        conn.Open();
+
+        var result = query.ExecuteScalar();
+
+        if (result != outc && result is not null)
+        {
+            var sqlSelectAll = "SELECT * FROM `course_data` WHERE code=\"" + courseCode + "\" AND year=\"" + year + "\";";
+
+            var newQuery = new MySqlCommand(sqlSelectAll, conn);
+            var reader = newQuery.ExecuteReader();
+            while (reader.Read())
+            {
+                courseObjective.Text = reader.GetString("objective");
+                courseSyllabus.Text = reader.GetString("syllabus");
+                courseOutcome.Text = reader.GetString("outcome");
+                courseReference.Text = reader.GetString("reference");
+            }
+        }
+        conn.Close();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -66,7 +100,7 @@ public sealed partial class UserEditCoursePage : Page
         Frame.Navigate(typeof(UserProgramCoursesPage), arr);
     }
 
-    private async void SubmitButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void SubmitButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
 
         //Taking user-input from the text fields
@@ -81,7 +115,8 @@ public sealed partial class UserEditCoursePage : Page
 
         var conn = new MySqlConnection(MyConnection2);
 
-        var sqlQuery = "SELECT `outcome` FROM `course_data` WHERE code=\"" + courseCode + "\";";
+        var sqlQuery = "SELECT `outcome` FROM `course_data` WHERE code=\"" + courseCode + "\" AND year=\"" + courseCode + "\";";
+
 
         var query = new MySqlCommand(sqlQuery, conn);
         conn.Open();
@@ -93,31 +128,28 @@ public sealed partial class UserEditCoursePage : Page
         {
             //courseObjective.Text = "Record exists";
 
-            string query2 = "UPDATE course_data " +
+            var query2 = "UPDATE course_data " +
     "SET objective=@obj, syllabus=@syll, outcome=@outc, reference=@refe " +
-    " WHERE code=@code;";
+    " WHERE code=@code AND year=@year;";
 
-            using (MySqlCommand command = new MySqlCommand(query2, conn))
-            {
-                //updating data in the sql table with the initial variables  
-                command.Parameters.AddWithValue("@code", courseCode);
-                command.Parameters.AddWithValue("@obj", obj);
-                command.Parameters.AddWithValue("@syll", syll);
-                command.Parameters.AddWithValue("@outc", outc);
-                command.Parameters.AddWithValue("@refe", refe);
-
-                command.ExecuteNonQuery();
-
-            }
+            using MySqlCommand command = new MySqlCommand(query2, conn);
+            //updating data in the sql table with the initial variables  
+            command.Parameters.AddWithValue("@code", courseCode);
+            command.Parameters.AddWithValue("@obj", obj);
+            command.Parameters.AddWithValue("@syll", syll);
+            command.Parameters.AddWithValue("@outc", outc);
+            command.Parameters.AddWithValue("@refe", refe);
+            command.Parameters.AddWithValue("@year", year);
+            command.ExecuteNonQuery();
 
         }
         else
         {
 
             //This is the insert query in which we're taking input from the user 
-            var Query = "INSERT INTO `course_data`(`code`, " +
+            var Query = "INSERT INTO `course_data`(`code`, `year`, " +
                 "`objective`, `syllabus`, `outcome`, `reference`)" +
-                " VALUES('" + courseCode + "', '" + obj + "', '" + syll + "', '" + outc + "'" +
+                " VALUES('" + courseCode + "', '" + year + "', '" + obj + "', '" + syll + "', '" + outc + "'" +
                 ", '" + refe + "');";
 
             //This is  MySqlConnection here we'll create the object and pass my connection string.
@@ -130,36 +162,7 @@ public sealed partial class UserEditCoursePage : Page
 
             conn.Close();
         }
-        
-        //##################  Agar textboxes clear karna ho to ye un-comment kardena ##################
-
-        //Emptying the text fields
-        //courseObjective.Text = "";
-        //courseSyllabus.Text = "";
-        //courseOutcome.Text = "";
-        //courseReference.Text = "";
 
     }
 
-    private async void OpenButton_Click(object sender, RoutedEventArgs e)
-    {
-        // Open a text file.
-        var open =
-            new FileOpenPicker
-            {
-                SuggestedStartLocation =
-            PickerLocationId.DocumentsLibrary
-            };
-        open.FileTypeFilter.Add(".rtf");
-
-        StorageFile file = await open.PickSingleFileAsync();
-
-        if (file != null)
-        {
-            using var randAccStream =
-                await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            // Load the file into the Document property of the RichEditBox.
-            //editor.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
-        }
-    }
 }
