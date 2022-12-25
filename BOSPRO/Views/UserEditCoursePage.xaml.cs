@@ -1,15 +1,7 @@
 ﻿using BOSPRO.ViewModels;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using MySql.Data.MySqlClient;
-using Windows.Storage.Pickers;
-using Windows.Storage.Provider;
-using Windows.Storage;
-using Microsoft.VisualBasic;
-//using static Google.Protobuf.Collections.MapField<TKey, TValue>;
-using System.Security.AccessControl;
-using Org.BouncyCastle.Utilities;
 
 namespace BOSPRO.Views;
 

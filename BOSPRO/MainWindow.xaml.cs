@@ -1,6 +1,4 @@
-﻿using BOSPRO.Helpers;
-
-namespace BOSPRO;
+﻿namespace BOSPRO;
 
 public sealed partial class MainWindow : WindowEx
 {

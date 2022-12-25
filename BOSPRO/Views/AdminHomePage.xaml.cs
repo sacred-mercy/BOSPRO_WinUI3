@@ -282,8 +282,8 @@ public sealed partial class AdminHomePage : Page
 
     private void AccountChangeSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        if(string.IsNullOrEmpty(AdminName.Text) ||
-            string.IsNullOrEmpty(AdminEmail.Text) || 
+        if (string.IsNullOrEmpty(AdminName.Text) ||
+            string.IsNullOrEmpty(AdminEmail.Text) ||
             string.IsNullOrEmpty(AdminCurrentPassword.Password) ||
             string.IsNullOrEmpty(AdminNewPassword.Password))
         {
