@@ -44,6 +44,18 @@
                 Style="{StaticResource AccentButtonStyle}"
                 Click="ProgramPrintButton_Click">
         </Button>
+        <ContentDialog x:Name="databaseErrorDialog"
+                       PrimaryButtonText="Ok"
+                       HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Please Select a Course"
+                           FontStyle="Normal"
+                           FontSize="20"
+                           TextWrapping="WrapWholeWords"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+
+        </ContentDialog>
 
         <ComboBox x:Name="CourseSelectComboBox"
                   Grid.Row="1"

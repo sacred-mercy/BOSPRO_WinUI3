@@ -1,8 +1,8 @@
 ﻿using BOSPRO.ViewModels;
-
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using MySql.Data.MySqlClient;
+using IronPdf;
 
 namespace BOSPRO.Views;
 
@@ -57,7 +57,6 @@ public sealed partial class UserProgramCoursesPage : Page
         getCourseNames();
     }
 
-
     private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         Frame.Navigate(typeof(UserHomePage));
@@ -65,13 +64,27 @@ public sealed partial class UserProgramCoursesPage : Page
 
     private void EditButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        if (string.IsNullOrEmpty((string)CourseSelectComboBox.SelectedItem))
+        {
+            showRequiredPopup();
+            return;
+        }
         string[] arr = { program, year, (string)CourseSelectComboBox.SelectedItem };
         Frame.Navigate(typeof(UserEditCoursePage), arr);
     }
 
     private void CoursePrintButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        if (string.IsNullOrEmpty((string)CourseSelectComboBox.SelectedItem))
+        {
+            showRequiredPopup();
+            return;
+        }
+    }
 
+    private async void showRequiredPopup()
+    {
+        await databaseErrorDialog.ShowAsync();
     }
 
     private void ProgramPrintButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
