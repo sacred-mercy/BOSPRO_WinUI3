@@ -26,35 +26,25 @@ public sealed partial class UserEditCoursePage : Page
 
     private void getCourseData()
     {
-        var outc = courseOutcome.Text;
         //connection string assigned the database file address path
-        var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
-
-
-        var conn = new MySqlConnection(MyConnection2);
-
-        var sqlQuery = "SELECT `outcome` FROM `course_data` WHERE code=\"" + courseCode + "\" AND year=\"" + courseCode + "\";";
-
-        var query = new MySqlCommand(sqlQuery, conn);
-        conn.Open();
-
-        var result = query.ExecuteScalar();
-
-        if (result != outc && result is not null)
-        {
-            var sqlSelectAll = "SELECT * FROM `course_data` WHERE code=\"" + courseCode + "\" AND year=\"" + year + "\";";
-
-            var newQuery = new MySqlCommand(sqlSelectAll, conn);
-            var reader = newQuery.ExecuteReader();
-            while (reader.Read())
-            {
-                courseObjective.Text = reader.GetString("objective");
-                courseSyllabus.Text = reader.GetString("syllabus");
-                courseOutcome.Text = reader.GetString("outcome");
-                courseReference.Text = reader.GetString("reference");
-            }
-        }
-        conn.Close();
+        //var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
+        //var conn = new MySqlConnection(MyConnection2);
+        //var sqlQuery = "SELECT * FROM `course_data` WHERE code='" + courseCode + "' AND year=" + year + ";";
+        //var query = new MySqlCommand(sqlQuery, conn);
+        //conn.Open();
+        //var result = query.ExecuteScalar();
+        //if (result != courseObjective.Text && result is not null)
+        //{
+        //var reader = query.ExecuteReader();
+        //while (reader.Read())
+        //{
+        //courseObjective.Text = reader.GetString("objective");
+        //courseSyllabus.Text = reader.GetString("syllabus");
+        //courseOutcome.Text = reader.GetString("outcome");
+        //courseReference.Text = reader.GetString("reference");
+        //}
+        //}
+        //conn.Close();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

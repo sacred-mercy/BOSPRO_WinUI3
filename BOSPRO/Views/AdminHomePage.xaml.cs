@@ -19,13 +19,15 @@ public sealed partial class AdminHomePage : Page
 
         // To fetch Admin name
         var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-        TabbedPivot_Profile.Header = localSettings.Values["name"] as string;
+        TabbedPivot_Profile.Header = "Profile";
+        AdminName.Text = localSettings.Values["name"] as string;
+        AdminEmail.Text = localSettings.Values["email"] as string;
 
         //Add Program Names from DB to ProgramRemoveComboBox
         getProgramNamesFromDatabase();
 
         //Add Users Names from DB to RemoveEmailCombobox
-        getUsersFromDatabase();
+        getUsersFromDatabase();     
     }
 
     private void getUsersFromDatabase()
