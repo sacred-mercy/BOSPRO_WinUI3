@@ -90,6 +90,15 @@ public sealed partial class UserEditCoursePage : Page
         var syll = courseSyllabus.Text;
         var outc = courseOutcome.Text;
         var refe = courseReference.Text;
+        
+        if(string.IsNullOrEmpty(obj) || 
+            string.IsNullOrEmpty(syll) || 
+            string.IsNullOrEmpty(outc) || 
+            string.IsNullOrEmpty(refe))
+        {
+            showRequiredPopup();
+            return;
+        }
 
         //connection string assigned the database file address path
         var MyConnection2 = "Server=localhost;Database=bospro;Uid=root;Pwd=;";
@@ -111,8 +120,8 @@ public sealed partial class UserEditCoursePage : Page
             //courseObjective.Text = "Record exists";
 
             var query2 = "UPDATE course_data " +
-    "SET objective=@obj, syllabus=@syll, outcome=@outc, reference=@refe " +
-    " WHERE code=@code AND year=@year;";
+                            "SET objective=@obj, syllabus=@syll, outcome=@outc, reference=@refe " +
+                            " WHERE code=@code AND year=@year;";
 
             using MySqlCommand command = new MySqlCommand(query2, conn);
             //updating data in the sql table with the initial variables  
@@ -142,9 +151,16 @@ public sealed partial class UserEditCoursePage : Page
             MyConn2.Open();
             _ = MyCommand2.ExecuteReader();     // Here our query will be executed and data saved into the database.
 
-            conn.Close();
         }
+        conn.Close();
+        //go back to previous page
+        string[] arr = { program, year };
+        Frame.Navigate(typeof(UserProgramCoursesPage), arr);
+    }
 
+    private async void showRequiredPopup()
+    {
+        await databaseErrorDialog.ShowAsync();
     }
 
 }

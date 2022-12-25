@@ -18,6 +18,18 @@
                     Click="BackButton_Click">
                 <SymbolIcon Symbol="Back" />
             </Button>
+            <ContentDialog x:Name="databaseErrorDialog"
+                           PrimaryButtonText="Ok"
+                           HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Please Enter all the details"
+                               FontStyle="Normal"
+                               FontSize="20"
+                               TextWrapping="WrapWholeWords"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+            </ContentDialog>
             <TextBlock Grid.Row="0"
                        Grid.ColumnSpan="3"
                        x:Name="Course_Title"
